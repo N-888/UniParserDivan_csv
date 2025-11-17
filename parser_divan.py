@@ -16,12 +16,12 @@ time.sleep(5)
 
 # Находим все карточки с товарами / услугами с помощью названия класса
 # Названия классов берём с кода сайта
-likvidatsiyas = driver.find_elements(By.CSS_SELECTOR, '__variable_1e6e6e __variable_a511a0 __variable_6c5720')
+likvidatsiyas = driver.find_elements(By.CSS_SELECTOR, '__variable_1e6e6e')
 
 # Создаём список, в который все результаты будем сохранять
 parsed_data = []
 
-# Перебираем коллекцию поисковой темы
+# Перебираем товары в своей искомой теме
 for likvidatsiya in likvidatsiyas:
 
     # Ловим ошибки, как только они появляются
@@ -29,7 +29,7 @@ for likvidatsiya in likvidatsiyas:
 
         # Ищем элементы внутри искомой Категории по значению
         # Наименования
-        name_element = likvidatsiya.find_element(By.CSS_SELECTOR, 'a.magritte-link___b4rEM_4-3-2')
+        name_element = likvidatsiya.find_element(By.CSS_SELECTOR, 'a.<deepl-inline>')
         name = name_element.text
 
         # Находим ссылку с помощью атрибута 'href'
@@ -60,7 +60,7 @@ for likvidatsiya in likvidatsiyas:
         continue
 
     # Вносим найденную информацию в список
-    parsed_data.append([name, price, size, color, link])
+    parsed_data.append([name, price, size, color, url])
 
 # Закрываем подключение браузера
 driver.quit()
@@ -78,13 +78,3 @@ with open("divanLikvidatsiya.csv", 'w',newline='', encoding='utf-8') as file:
 
     # Прописываем использование списка как источника для рядов таблицы
     writer.writerows(parsed_data)
-
-        for item in items:
-            result = [
-                item.get("id"),
-                item.get("name"),
-                item.get("price"),
-                item.get("size"),
-                item.get("color"),
-                item.get("url")
-            ]
