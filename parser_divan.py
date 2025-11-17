@@ -16,7 +16,7 @@ time.sleep(5)
 
 # Находим все карточки с товарами / услугами с помощью названия класса
 # Названия классов берём с кода сайта
-likvidatsiyas = driver.find_elements(By.CSS_SELECTOR, '__variable_1e6e6e')
+likvidatsiyas = driver.find_elements(By.CSS_SELECTOR, 'popmechanic-desktop')
 
 # Создаём список, в который все результаты будем сохранять
 parsed_data = []
