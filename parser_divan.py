@@ -9,6 +9,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 # Инициализация рабочего Браузера с разными Таймаутами
 driver = webdriver.Firefox()
+driver.set_page_load_timeout(30)
 driver.implicitly_wait(10)  # Неявное ожидание элементов
 wait = WebDriverWait(driver, 15)  # Явное ожидание
 
@@ -35,7 +36,6 @@ parsed_data = []
 
     # Ловим ошибки, как только они появляются
     try:
-
         # Ищем ЭЛЕМЕНТЫ внутри искомой Категории по значению:
         # Наименование товара
         name_element = product.find_element(By.CSS_SELECTOR, '[data-testid="product-title"]')
@@ -85,4 +85,5 @@ with open("divanLikvidatsiya.csv", 'w',newline='', encoding='utf-8') as file:
     # Указываем использование списка как источника для рядов таблицы
     writer.writerows(parsed_data)
 
+print(f"Парсинг завершен. Найдено товаров: {len(products)}")
 print(f"Парсинг завершен. Сохранено {len(parsed_data)} товаров")
